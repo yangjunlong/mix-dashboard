@@ -1,0 +1,39 @@
+/**
+ * 文本输入域样式
+ *
+ * @import url('/arch/lib/est/all.less');
+ * 
+ * @author  Yang,junlong at 2016-06-12 15:16:57 build.
+ * @version $Id$
+ */
+
+.mi-textarea {
+    position: relative;
+    padding: 0;
+    width: 600px;
+    height: 80px;
+    display: inline-block;
+    textarea {
+        height: 100%;
+        width: 100%;
+        resize: none;
+        border: none;
+        outline: none;
+        padding: 5px;
+    }
+
+    .max-length {
+        position: absolute;
+        right: 8px;
+        bottom: 5px;
+        color: #aaa;
+        font-family: arial, tahoma, "Microsoft YaHei", "\5b8b\4f53";
+    }
+}
+.mi-textarea-focus{
+    box-shadow: 0 1px 0px #cacaca, 0 1px 2px 1px #e4e4e4;
+    textarea {
+        background-color: #f7f9fa;
+        outline: none;
+    }
+}

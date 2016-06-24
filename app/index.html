@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MIX-ANGULARJS</title>
+
+    <script type="text/javascript" src="/mix/lib/mod/mod.js"></script>
+
+</head>
+<body>
+
+<div ui-view></div>
+
+<script type="text/javascript">
+    require.async('app/main', function (app) {
+        angular.element(document).ready(function() {
+            angular.bootstrap(document, [app['name'], function() {
+                // for good measure, put ng-app on the html element
+                // studiously avoiding jQuery because angularjs.org says we shouldn't
+                // use it.  In real life, there are a ton of reasons to use it.
+                // karma likes to have ng-app on the html element when using requirejs.
+                angular.element(document).find('html').addClass('ng-app');
+            }]);
+        });
+    });
+</script>
+</body>
+</html>

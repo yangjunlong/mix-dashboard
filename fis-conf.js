@@ -35,7 +35,8 @@ fis.config.merge({
         },
         postpackager: {
         	modjs: {
-        		subpath: 'pkg/map.js'
+        		subpath: 'pkg/map.js',
+                useType: true
         	}
         }
     },
@@ -45,6 +46,15 @@ fis.config.merge({
             less : 'css'
         },
         path : [
+            {
+                reg: /LICENSE/i,
+                release: false
+            },
+            {
+                // .html|css 后缀的文件不加入map.json
+                reg: /^.*(.+\.(?:html|css))$/i,
+                useMap: false
+            },
             {
                 reg: /^(?!.*mod.js).*$/i,
                 isMod: true

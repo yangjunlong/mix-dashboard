@@ -157,45 +157,47 @@ var define;
         return mod.exports;
     };
 
+    // 分析依赖
     require.async = function (names, onload, onerror) {
         if (typeof names === 'string') {
             names = [names];
         }
 
-        var needMap = {};
+        var depsMap = {};
         var needNum = 0;
-        var needLoad = [];
+        var depsRes = [];
 
-        function findNeed(depArr) {
+        // 查找依赖
+        function findDeps(deps) {
             var child;
 
-            for (var i = 0, n = depArr.length; i < n; i++) {
+            for (var i = 0, n = deps.length; i < n; i++) {
                 //
                 // skip loading or loaded
                 //
-                var dep = require.alias(depArr[i]);
+                var dep = require.alias(deps[i]);
 
-                if (dep in needMap) {
+                if (dep in depsMap) {
                     continue;
                 }
 
-                needMap[dep] = true;
+                depsMap[dep] = true;
 
                 if (dep in factoryMap) {
                     // check whether loaded resource's deps is loaded or not
                     child = resMap[dep] || resMap[dep + '.js'];
                     if (child && 'deps' in child) {
-                        findNeed(child.deps);
+                        findDeps(child.deps);
                     }
                     continue;
                 }
 
-                needLoad.push(dep);
+                depsRes.push(dep);
                 needNum++;
 
                 child = resMap[dep] || resMap[dep + '.js'];
                 if (child && 'deps' in child) {
-                    findNeed(child.deps);
+                    findDeps(child.deps);
                 }
             }
         }
@@ -211,8 +213,113 @@ var define;
             }
         }
 
-        findNeed(names);
-        loadScripts(needLoad, updateNeed, onerror);
+        // 加载依赖资源
+        function loadDepsRes(depsRes, callback) {
+            var queues = {};
+            for(var i = 0, l = depsRes.length; i < l; i++) {
+                var dep = depsRes[i];
+
+                var res = resMap[dep] || resMap[dep + '.js'] || {};
+                var pkg = res.pkg;
+                var url;
+
+                if (pkg) {
+                    url = pkgMap[pkg].url || pkgMap[pkg].uri;
+                } else {
+                    url = res.url || res.uri || dep;
+                }
+
+                var type = res['type'];
+
+                if(!type) {
+                    var index = url.lastIndexOf('.');
+                    type = url.substr(index + 1);
+                    type = type.toLowerCase();
+                }
+                queues[type] || (queues[type] = []);
+
+                queues[type].push({
+                    dep: dep,
+                    url: url
+                });
+            }
+            loadRes(queues, callback);
+        }
+
+        function loadRes (res, callback) {
+            var docFrag = document.createDocumentFragment();
+
+            for( var type in res ) {
+                var deps = res[type];
+                var size = deps.length;
+
+                switch(type){
+                case 'js':
+                    for(var i = 0, l = deps.length; i < l; i++) {
+                        var dep = deps[i].dep;
+                        var url = deps[i].url;
+
+                        // with js
+                        var queue = loadingMap[dep] || (loadingMap[dep] = []);
+                        queue.push((function(size){
+                            return function(){
+                                callback(size)
+                            }
+                        })(size));
+
+                        if (url in scriptsMap) {
+                            continue;
+                        }
+
+                        scriptsMap[url] = true;
+                        var script = require.js({
+                            url: url,
+                            onload: function(){
+                                //callback(size)
+                            }
+                        });
+                        docFrag.appendChild(script);
+                    }
+                    break;
+                case 'css':
+                    for(var i = 0, l = deps.length; i < l; i++) {
+                        var dep = deps[i].dep;
+                        var url = deps[i].url;
+                        if (url in scriptsMap) {
+                            continue;
+                        }
+                        scriptsMap[url] = true;
+
+                        var link = require.css({
+                            url: url,
+                            onload: function(){
+                                //callback(size)
+                            }
+                        });
+                        docFrag.appendChild(link);
+                    }
+                    break;
+                default:
+                }
+            }
+
+            head.appendChild(docFrag);
+        }
+
+        findDeps(names);
+
+        // 
+        var despNum = 0;
+        loadDepsRes(depsRes, function(size) {
+            if(++despNum == size) {
+                var args = [];
+                for (var i = 0, n = names.length; i < n; i++) {
+                    args[i] = require(names[i]);
+                }
+                onload && onload.apply(global, args);
+            }
+        });
+        //loadScripts(needLoad, updateNeed, onerror);
         updateNeed();
     };
     
@@ -284,4 +391,91 @@ var define;
 
     require.timeout = 5000;
 
+
+
+    // util
+    
+    require.js = function(options) {
+        // var options = {
+        //     url: '',
+        //     id: '',
+        //     onload: function(){},
+        //     onerror: function(){},
+        //     noecho: false
+        // };
+
+        var script = document.createElement('script');
+
+        var _onload = function () {
+            clearTimeout(tid);
+            options.onload && options.onload();
+        };
+
+        var _onerror = function () {
+            clearTimeout(tid);
+            options.onerror && options.onerror();
+        };
+
+        var tid = setTimeout(_onerror, require.timeout);
+        script.onerror = _onerror;
+
+        if ('onload' in script) {
+            script.onload = _onload;
+        } else {
+            script.onreadystatechange = function () {
+                if (this.readyState === 'loaded' || this.readyState === 'complete') {
+                    _onload();
+                }
+            };
+        }
+
+        script.type = 'text/javascript';
+        script.src = options.url;
+        // script.id = id;
+        
+        if(!options.noecho) {
+            head.appendChild(script);
+        }
+        return script;
+    }
+
+    require.js({url: 'app.js'});
+
+    require.css = function (options) {
+        var link = document.createElement('link');
+
+        var _onload = function () {
+            clearTimeout(tid);
+            options.onload && options.onload();
+        };
+
+        var _onerror = function () {
+            clearTimeout(tid);
+            options.onerror && options.onerror();
+        };
+
+        var tid = setTimeout(_onerror, require.timeout);
+
+        link.onerror = _onerror;
+
+        if ('onload' in link) {
+            link.onload = _onload;
+        } else {
+            script.onreadystatechange = function () {
+                if (this.readyState === 'loaded' || this.readyState === 'complete') {
+                    _onload();
+                }
+            };
+        }
+
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = options.url;
+        // script.id = id;
+        
+        if(!options.noecho) {
+            head.appendChild(link);
+        }
+        return link;
+    }
 })(this);

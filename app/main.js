@@ -1,25 +1,19 @@
-require('/mix/lib/angular/angular.js');
-require('/mix/lib/angular-ui-router/angular-ui-router.js');
-require('/mix/lib/angular-couch-potato/angular-couch-potato.js');
+/**
+ * main file
+ * 
+ * @author  Yang,junlong at 2016-06-28 10:58:58 build.
+ * @version $Id$
+ */
 
-require('/mix/lib/angular-ui-bootstrap/ui-bootstrap-tpls.js');
-//require('/mix/lib/angular-loading-bar/loading-bar.js');
-require('/mix/lib/angular-file-upload/angular-file-upload.js');
+var app = require('app.js');
+// require app router define
+require('routeDefs.js');
+// require app http interceptor
+require('http-interceptor.js');
 
-//定义angular模块
-var app = angular.module('mix', [
-    'scs.couch-potato', 
-    'ui.router',
-    'ui.bootstrap', 
-    'ui.bootstrap.tpls',
-    //'chieffancypants.loadingBar',
-    'angularFileUpload',
-]).config([
+app.controller('AppCtrl', ['$scope', '$http', '$modal', '$q', function($scope, $http, $modal, $q) {
 
-    function(datepickerConfig, datepickerPopupConfig, paginationConfig) {
-        // ui-bootstrap datepicker gloable config
-        
-    }
-]);
+    $scope.title = '这是标题';
+}]);
 
 module.exports = app;

@@ -36,7 +36,7 @@ fis.config.merge({
         postpackager: {
         	modjs: {
         		subpath: 'pkg/map.js',
-                useType: true
+                useType: false
         	}
         }
     },

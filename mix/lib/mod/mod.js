@@ -164,13 +164,12 @@ var define;
         }
 
         var depsMap = {};
-        var needNum = 0;
         var depsRes = [];
 
         // 查找依赖
         function findDeps(deps) {
             var child;
-
+            var restmp = [];
             for (var i = 0, n = deps.length; i < n; i++) {
                 //
                 // skip loading or loaded
@@ -192,14 +191,15 @@ var define;
                     continue;
                 }
 
-                depsRes.push(dep);
-                needNum++;
+                restmp.push(dep);
+                //depsRes.push(dep);
 
                 child = resMap[dep] || resMap[dep + '.js'];
                 if (child && 'deps' in child) {
                     findDeps(child.deps);
                 }
             }
+            depsRes = depsRes.concat(restmp);
         }
 
         function updateNeed() {
@@ -307,7 +307,7 @@ var define;
         }
 
         findDeps(names);
-
+        //console.log(depsRes);
         // 
         var despNum = 0;
         loadDepsRes(depsRes, function(size) {
@@ -320,7 +320,7 @@ var define;
             }
         });
         //loadScripts(needLoad, updateNeed, onerror);
-        updateNeed();
+        //updateNeed();
     };
     
     require.ensure = function(names, callback) {

@@ -16,6 +16,9 @@ require('/mix/lib/angular-ui-bootstrap/ui-bootstrap-tpls.js');
 require('/mix/lib/angular-loading-bar/loading-bar.js');
 require('/mix/lib/angular-file-upload/angular-file-upload.js');
 
+// load jquery-slimscroll.js
+require('/mix/directive/ngSlimscroll/ngSlimscroll.js');
+
 //定义angular模块
 var app = angular.module('app', [
     'ui.router',
@@ -25,7 +28,8 @@ var app = angular.module('app', [
     'ui.bootstrap', 
     'ui.bootstrap.tpls',
     'chieffancypants.loadingBar',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ui.slimscroll'
 ]).config([
     'datepickerConfig', 
     'datepickerPopupConfig', 

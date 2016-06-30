@@ -32,8 +32,8 @@
 
                 // init options
                 var height = attrs['height'] || element.clientHeight || '250px';
-                height = parseInt(height);
-                height = isNaN(height) ? '250px' : height + 'px';
+                // height = parseInt(height);
+                // height = isNaN(height) ? '250px' : height + 'px';
 
                 var width = attrs['width'] || element.clientWidth || '250px';
                 width = parseInt(width);
@@ -162,15 +162,13 @@
                 $element.parent().append(bar);
                 $element.parent().append(rail);
 
-                bar.css({
-                    display: 'block',
-                    height: '200px'
-                });
                 // flag var 
                 var isDraging = false;
                 var hideTimer = null;
                 var minBarHeight = 30;
                 var releaseScroll = false;
+                var barHeight = 0;
+                var isShow = false;
 
                 // make it draggable and no longer dependent on the jqueryUI
                 if (options.railDraggable){
@@ -294,7 +292,7 @@
 
                 function setBarHeight() {
                     // calculate scrollbar height and make sure it is not too small
-                    var barHeight = Math.max((element.offsetHeight / element.scrollHeight) * element.offsetHeight, minBarHeight);
+                    barHeight = Math.max((element.offsetHeight / element.scrollHeight) * element.offsetHeight, minBarHeight);
                     // hide scrollbar if content is not long enough
                     var display = barHeight == element.offsetHeight ? 'none' : 'block';
 
@@ -307,15 +305,42 @@
                 // show scroller bar
                 function showBar () {
                     clearTimeout(hideTimer);
+                    if(isShow) {
+                        return;
+                    }
+                    setBarHeight();
                     
+                    // show only when required
+                    if(barHeight >= element.offsetHeight) {
+                        //allow window scroll
+                        releaseScroll = true;
+                        return;
+                    }
+
+                    bar.css({
+                        display: 'block'
+                    });
+                    if (options.railVisible) { 
+                        rail.css({
+                            display: 'block'
+                        }); 
+                    }
+
+                    isShow = true;
                 }
 
                 // hide scroller bar
                 function hideBar () {
                     if (!options.alwaysVisible) {
                         hideTimer = setTimeout(function() {
-                            bar.fadeOut('slow');
-                            rail.fadeOut('slow');
+                            bar.css({
+                                display: 'none'
+                            });
+                            rail.css({
+                                display: 'none'
+                            });
+
+                            isShow = false;
                         }, 1000);
                     }
                 }

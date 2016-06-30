@@ -70,8 +70,22 @@ body {
 }
 
 .content {
+    position: relative;
     margin-left: 220px;
     padding-top: 35px;
+    min-height: 500px;
+    height: 100%;
+}
+
+.footer {
+    background: #fff;
+    border-top: 1px solid #ccc;
+    min-height: 30px;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .main-menu {
@@ -96,6 +110,7 @@ body {
         margin-bottom: 0;
         .panel-collapse {
             .panel-body {
+                position: relative;
                 border: none;
                 padding: 0;
             }
@@ -146,8 +161,33 @@ body {
     }
 }
 .child-menu {
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 10;
+        left: 18px;
+        top: 0;
+        bottom: 0;
+        border: 1px solid #394046;
+        border-width: 0 0 0 1px;
+    }
     li {
+        position: relative;
         padding-left: 38px;
+        &:before {
+            margin-top: 10px;
+            position: absolute;
+            background: #425668;
+            //background-color: rgba(0, 0, 0, 0.2);
+            content: "";
+            left: 15px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            z-index: 100;
+        }
         a {
             display: block;
             font-size: 12px;

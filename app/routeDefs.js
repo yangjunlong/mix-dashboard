@@ -36,6 +36,11 @@ app.provider('routeDefs', [
             resolve: {
                 deps: app.deps('app/module/home/home.js')
             }
+        }).state('test', {
+            url: '/test',
+            templateUrl: function(stateParams){
+                return __uri('module/test/test.html');
+            }
         });
     }
 ]);

@@ -69,6 +69,11 @@ var app = angular.module('app', [
         // are available in the DOM, therefore they should be on $rootScope.
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+
+        // 监听路由变化
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+            console.log(event);
+        })
     }
 ]);
 

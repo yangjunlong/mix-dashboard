@@ -7,7 +7,7 @@
     <script type="text/javascript" src="/mix/lib/mod/mod.js"></script>
 
 </head>
-<body class="mix" ng-controller="AppCtrl as app">
+<body class="mix" ng-controller="AppCtrl as app" style="display: none;">
 <div id="header" class="header navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -24,6 +24,16 @@
 <div id="sidebar" class="sidebar">
     <div class="sidebar-section" ng-slimscroll rail-visible="true" height="100%">
         <ul class="nav main-menu" accordion>
+            <li accordion-group is-open="true" class="active" is-disabled="true">
+                <accordion-heading><i class="fa fa-home"></i>自定义的面板标题<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </accordion-heading>
+
+                <ul class="child-menu">
+                    <li><a href="d">图标</a></li>
+                    <li><a href="d">用户管理</a></li>
+                </ul>
+            </li>
+
             <li>
                 
                 <a class="main-link" href="#"><i class="fa fa-home"></i>控制台<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': dever.open, 'glyphicon-chevron-right': !dever.open}"></i></a> 
@@ -41,15 +51,7 @@
                 <a class="main-link" href="#"><i class="fa fa-home"></i>平台管理<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': dever.open, 'glyphicon-chevron-right': !dever.open}"></i></a> 
                 
             </li>
-            <li accordion-group is-open="true" class="active" is-disabled="true">
-                <accordion-heading><i class="fa fa-home"></i>自定义的面板标题<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                </accordion-heading>
-
-                <ul class="child-menu">
-                    <li><a href="d">图标</a></li>
-                    <li><a href="d">用户管理</a></li>
-                </ul>
-            </li>
+            
 
             <li accordion-group is-open="true" class="active" is-disabled="true">
                 <accordion-heading><i class="fa fa-home"></i>开发者选项<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
@@ -68,6 +70,10 @@
 
 <div id="content" class="content">
     <div ui-view></div>
+    <div class="footer">
+        <p class="pull-right">小米支付，荣誉出品</p>
+        <p><b>Copyright</b> XiaoMi &copy; 2010-2016</p>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -78,7 +84,7 @@
                 // studiously avoiding jQuery because angularjs.org says we shouldn't
                 // use it.  In real life, there are a ton of reasons to use it.
                 // karma likes to have ng-app on the html element when using requirejs.
-                angular.element(document).find('html').addClass('ng-app');
+                angular.element(document).find('html').addClass('ng-app').find('body').css('display', 'block');
             }]);
         });
     });

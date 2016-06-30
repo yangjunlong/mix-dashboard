@@ -11,7 +11,8 @@ require('routeDefs.js');
 // require app http interceptor
 require('http-interceptor.js');
 
-app.controller('AppCtrl', ['$scope', '$http', '$modal', '$q', function($scope, $http, $modal, $q) {
+app.controller('AppCtrl', ['$scope', '$http', '$state', '$q', function($scope, $http, $state, $q) {
+	console.log($state);
 
     $scope.title = '这是标题';
 
@@ -40,7 +41,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$modal', '$q', function($scope, $
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  
+
 }]);
 
 module.exports = app;

@@ -7,7 +7,7 @@
 @import url('/mix/base.less');
 
 body {
-    background: #d9e0e7;
+    background: #2d353c;
     font-size: 12px;
     font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #707478;
@@ -54,7 +54,97 @@ body {
         opacity: .9;
         filter: alpha(opacity=90);
     }
+
+    .navbar-nav {
+        li {
+            a {
+                height: 35px;
+                line-height: 35px;
+                padding: 0 10px;
+                font-size: 14px;
+                &:hover {
+                    color: #e7e7e7;
+                    background-color: rgba(255, 255, 255, 0.06);
+                }
+            }
+        }
+        .userinfo{
+            button {
+                color: #e7e7e7;
+                border: none;
+                background: none;
+                outline: none;
+                border-radius: 0;
+                padding: 0 12px;
+                height: 35px;
+                line-height: 35px;
+                background: none;
+            }
+        }
+        .open {
+            button {
+                &:hover, &:focus {
+                    color: #fff;
+                    background: #0e1216;
+                }
+                i {
+                    &.fa-angle-down:before {
+                        content: "\f106";
+                    }
+                }
+            }
+        }
+        .dropdown-menu {
+            border-radius: 2px;
+            box-shadow: 0 1px 2px 1px rgba(0,0,0,.1);
+            border: none;
+            &:before{
+                content: " ";
+                display: table;
+                position: absolute;
+                top: -8px;
+                right: 11px;
+                display: inline-block;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid #fff;
+                border-left: 10px solid transparent;
+            }
+            li {
+               a {
+                    height: 30px;
+                    line-height: 30px;
+                    &:hover, &:focus {
+                        text-decoration: none;
+                        color: #656b79;
+                        background-color: #e9ecf0;
+                    }
+                    i.pull-right{
+                        margin-top: 8px;
+                    }
+                } 
+            }
+            .divider {
+                margin: 5px 0;
+            }
+        }
+    }
+    .navbar-form {
+        padding-top: 5px;
+        margin: 0;
+        input {
+            border: none;
+            border-radius: 2px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.06);
+            &:hover {
+
+            }
+        }
+    }
 }
+// navbar reset bootstrap stylesheet
+
+
 
 
 .sidebar {
@@ -71,10 +161,12 @@ body {
 
 .content {
     position: relative;
+    background: #d9e0e7;
     margin-left: 220px;
     padding-top: 35px;
-    min-height: 500px;
-    height: 100%;
+    //min-height: 500px;
+    min-height: 0px;
+    padding-bottom: 100%;
 }
 
 .footer {
@@ -135,6 +227,9 @@ body {
                     padding: 10px 15px;
                     display: block;
                 }
+                .glyphicon {
+                    top: 5px;
+                }
             }
         }
     }
@@ -167,7 +262,7 @@ body {
         display: block;
         position: absolute;
         z-index: 10;
-        left: 18px;
+        left: 22px;
         top: 0;
         bottom: 0;
         border: 1px solid #394046;
@@ -182,7 +277,7 @@ body {
             background: #425668;
             //background-color: rgba(0, 0, 0, 0.2);
             content: "";
-            left: 15px;
+            left: 19px;
             width: 7px;
             height: 7px;
             border-radius: 50%;

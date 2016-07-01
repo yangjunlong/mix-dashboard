@@ -39,8 +39,6 @@
                 width = parseInt(width);
                 width = isNaN(width) ? 'auto' : width + 'px';
 
-                console.log($scope.$eval(attrs['alwaysVisible']));
-
                 var options = {
                     // width in pixels of the visible scroll area
                     width : width,

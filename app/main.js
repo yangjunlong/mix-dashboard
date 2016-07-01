@@ -11,8 +11,18 @@ require('routeDefs.js');
 // require app http interceptor
 require('http-interceptor.js');
 
-app.controller('AppCtrl', ['$scope', '$http', '$state', '$q', function($scope, $http, $state, $q) {
-	console.log($state);
+app.controller('AppCtrl', ['$scope', '$http', '$state', '$window', function($scope, $http, $state, $window) {
+    var timer = null;
+    var $content = angular.element(document.getElementById('content'));
+    $window.onresize = function () {
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            $content.css({
+              'minHeight': document.documentElement.clientHeight + 'px'
+            });
+        }, 200);
+    };
+    $window.onresize();
 
     $scope.title = '这是标题';
 

@@ -70,9 +70,31 @@ var app = angular.module('app', [
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
+        $rootScope.curTime =  Date.parse(new Date());
+        $rootScope.endTime =  Date.parse(new Date());
+        $rootScope.startTime =  Date.parse(new Date()) - 86400*7*1000;
+
+        // init accordion flag
+        $rootScope.home = {}
+        $rootScope.table = {}
+        $rootScope.icons = {}
+
         // 监听路由变化
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-            console.log(event);
+            var tostateName = toState.name;
+            var _tostateName = tostateName.split('.');
+            tostateName = _tostateName[0] || 'home';
+
+            var fromstateName = fromState.name;
+            var _fromstateName = fromstateName.split('.');
+            fromstateName = _fromstateName[0] || 'home';
+
+            angular.element(document.body).removeClass(_fromstateName.join(' '));
+            angular.element(document.body).addClass(_tostateName.join(' '));
+
+            $rootScope[tostateName] = {
+                open: true
+            };
         })
     }
 ]);
@@ -83,6 +105,8 @@ app.deps = function(des) {
         //异步加载controller／directive/filter/service
         require.async(des, function() { 
             deferred.resolve(); 
+        }, function() {
+            deferred.resolve();
         });
         return deferred.promise;
     }];

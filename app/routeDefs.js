@@ -21,7 +21,7 @@ app.provider('routeDefs', [
         };
         //$locationProvider.html5Mode(true);
 
-        $urlRouterProvider.otherwise('home');
+        $urlRouterProvider.otherwise('home/index');
 
         // a uniform empty tpl for inherit
         var emptyTplInherit = __uri('./empty.html');
@@ -29,6 +29,11 @@ app.provider('routeDefs', [
         // 首页
         $stateProvider.state('home', {
             url: '/home',
+            abstract: true,
+            templateUrl: emptyTplInherit
+        })
+        .state('home.index', {
+            url: '/index',
             templateUrl: function(stateParams){
                 return __uri('module/home/home.html');
             },
@@ -36,11 +41,92 @@ app.provider('routeDefs', [
             resolve: {
                 deps: app.deps('app/module/home/home.js')
             }
-        }).state('test', {
-            url: '/test',
+        })
+        .state('home.order', {
+            url: '/order?startDate&endDate&bizType&bizId',
             templateUrl: function(stateParams){
-                return __uri('module/test/test.html');
+                return __uri('module/order/order.html');
+            },
+            controller: 'orderCtrl',
+            resolve: {
+                deps: app.deps('app/module/order/order.js')
             }
-        });
+        })
+        .state('table', {
+            url: '/table',
+            abstract: true,
+            templateUrl: emptyTplInherit
+        })
+        .state('table.simple', {
+            url: '/simple',
+            templateUrl: function(stateParams){
+                return __uri('module/table/simple/simple.html');
+            },
+            controller: 'simpleTableCtrl',
+            resolve: {
+                deps: app.deps('app/module/table/simple/simple.js')
+            }
+        })
+        .state('table.dynamic', {
+            url: '/dynamic',
+            templateUrl: function(stateParams){
+                return __uri('module/table/dynamic/dynamic.html');
+            },
+            controller: 'dynamicTableCtrl',
+            resolve: {
+                deps: app.deps('app/module/table/dynamic/dynamic.js')
+            }
+        })
+        .state('icons', {
+            url: '/icons',
+            abstract: true,
+            templateUrl: emptyTplInherit
+        })
+        .state('icons.fontawesome', {
+            url: '/fontawesome',
+            templateUrl: function(stateParams){
+                return __uri('module/icons/fontawesome/fontawesome.html');
+            },
+            controller: 'fontAwesomeCtrl',
+            resolve: {
+                deps: app.deps('app/module/icons/fontawesome/fontawesome.js')
+            }
+        })
+        .state('icons.glyphicons', {
+            url: '/glyphicons',
+            templateUrl: function(stateParams){
+                return __uri('module/icons/glyphicons/glyphicons.html');
+            },
+            controller: 'glyphiconsCtrl',
+            resolve: {
+                deps: app.deps('app/module/icons/glyphicons/glyphicons.js')
+            }
+        })
+        .state('icon', {
+            url: '/icon/{icon:[a-zA-Z-0-9]+}',
+            templateUrl: function(stateParams){
+                return __uri('module/icons/icon.html');
+            },
+            controller: 'fontIconCtrl',
+            resolve: {
+                deps: app.deps('app/module/icons/icon.js')
+            }
+        })
+        .state('form', {
+            url: '/form',
+            abstract: true,
+            templateUrl: emptyTplInherit
+        })
+        .state('form.basic', {
+            url: '/basic',
+            templateUrl: function(stateParams){
+                return __uri('module/form/basic/basic.html');
+            },
+            controller: 'basicFormCtrl',
+            resolve: {
+                deps: app.deps('app/module/form/basic/basic.js')
+            }
+        })
+        ;
     }
 ]);

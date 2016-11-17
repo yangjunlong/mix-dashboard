@@ -51,6 +51,16 @@ fis.config.merge({
                 release: false
             },
             {
+                reg: 'server.conf',
+                release: '/WEB-INF/server.conf'
+            },
+            {
+                reg: /^\/app\/index\.html$/i,
+                isMod: true,
+                useMap: false,
+                release: '/index.html'
+            },
+            {
                 // .html|css 后缀的文件不加入map.json
                 reg: /^.*(.+\.(?:html|css))$/i,
                 useMap: false
@@ -58,6 +68,11 @@ fis.config.merge({
             {
                 reg: /^(?!.*mod.js).*$/i,
                 isMod: true
+            },
+            {
+                // default
+                reg: /^.+$/,
+                release: '/static/$&'
             }
         ]
     }

@@ -165,6 +165,7 @@ var define;
 
         var depsMap = {};
         var depsRes = [];
+        var temNum = 0;
 
         // 查找依赖
         function findDeps(deps) {
@@ -192,7 +193,7 @@ var define;
                 }
 
                 restmp.push(dep);
-                //depsRes.push(dep);
+                temNum++ ;
 
                 child = resMap[dep] || resMap[dep + '.js'];
                 if (child && 'deps' in child) {
@@ -289,12 +290,15 @@ var define;
                             continue;
                         }
                         scriptsMap[url] = true;
-
                         var link = require.css({
                             url: url,
-                            onload: function(){
-                                //callback(size)
-                            }
+                            onload: (function(dep){
+                                return function(){
+                                    //callback(size)
+                                    factoryMap[dep] = true;
+                                    //console.log(deps);
+                                }
+                            })(dep)
                         });
                         docFrag.appendChild(link);
                     }
@@ -310,7 +314,7 @@ var define;
         //console.log(depsRes);
         // 
         var despNum = 0;
-        loadDepsRes(depsRes, function(size) {
+        var callback = function (size) {
             if(++despNum == size) {
                 var args = [];
                 for (var i = 0, n = names.length; i < n; i++) {
@@ -318,7 +322,13 @@ var define;
                 }
                 onload && onload.apply(global, args);
             }
-        });
+        }
+        loadDepsRes(depsRes, callback);
+
+        if (temNum == 0) {
+            // TODO 
+            callback(1);
+        }
         //loadScripts(needLoad, updateNeed, onerror);
         //updateNeed();
     };
@@ -438,8 +448,6 @@ var define;
         }
         return script;
     }
-
-    require.js({url: 'app.js'});
 
     require.css = function (options) {
         var link = document.createElement('link');

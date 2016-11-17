@@ -1,2 +1,2 @@
-# fis-angular-dashboard
-fis-angular-dashboard
+# mix-dashboard
+> mix-dashboard

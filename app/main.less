@@ -18,22 +18,23 @@ body {
     background: #2d353c;
     min-height: 35px;
     .navbar-brand {
-        font-family: 'Pacifico', cursive;
+        //font-family: 'Pacifico', cursive;
         color: #fff;
         margin-right: 10px;
         padding: 2px 20px;
         height: 35px;
         width: 220px;
         font-weight: 100;
-        font-size: 22px;
+        font-size: 20px;
         line-height: 30px;
-        background-color: #ff6700;
+        background-color: #00ae66;
+        font-family: Arial,sans-serif;
         &:focus {
-            background-color: #ff6700;
+            background-color: #00ae66;
         }
         &:hover {
             color: #fff;
-            background-color: #ff6700;
+            background-color: #00ae66;
         }
         &:active {
             color: #fff;
@@ -43,6 +44,7 @@ body {
     .navbar-logo {
         background: url(./img/mi.png) no-repeat;
         background-size: contain;
+        margin-right: 5px;
     }
 
     .navbar-logo {
@@ -144,9 +146,6 @@ body {
 }
 // navbar reset bootstrap stylesheet
 
-
-
-
 .sidebar {
 	background: #2d353c;
     left: 0;
@@ -167,7 +166,7 @@ body {
     min-height: 500px;
     .work-view {
         padding-top: 15px;
-        padding-bottom: 30px;
+        padding-bottom: 45px;
     }
 }
 
@@ -228,6 +227,7 @@ body {
                 a {
                     padding: 10px 15px;
                     display: block;
+                    font-size: 14px;
                 }
                 .glyphicon {
                     top: 5px;
@@ -293,8 +293,139 @@ body {
             font-size: 12px;
             padding: 9px;
         }
-        &:hover {
+        &:hover, &.active {
             background-color: rgba(255, 255, 255, 0.06);
         }
     }
+}
+
+.work-view {
+    padding-top: 15px;
+    padding-bottom: 30px;
+    font-size: 14px;
+    h1.page-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        span {
+            font-size: 14px;
+        }
+    }
+    h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+}
+
+// modal directive
+.modal-content {
+    .border-radius(3px);
+    .modal-header {
+        border-bottom: none;
+    }
+    .modal-title {
+        font-size: 24px;
+    }
+    .modal-close {
+        float: right;
+        color: #ccc;
+        &:hover {
+            color: #aaa;
+        }
+    }
+    .modal-footer {
+        border-top: none;
+    }
+    .modal-body {
+        text-align: center;
+    }
+
+    .mi-logo{
+        padding: 10px;
+        background-color: #ff6700;
+        width: 50px;
+        margin: 0 auto;
+        span {
+            display: block;
+            width: 30px;
+            height: 30px;
+            background: url(./img/mi.png) no-repeat center;
+            background-size: contain;
+        }
+    }
+    .mix {
+        font-size: 18px;
+        margin: 10px 0 5px;
+        font-family: 'Pacifico', cursive;
+        span {
+            font-size: 12px;
+            color: #999;
+        }
+    }
+    .supports {
+        text-align: left;
+        font-size: 14px;
+        h3 {
+            font-size: 16px;
+        }
+        ul {
+            padding-top: 10px;
+            padding-left: 20px;
+            li {
+                margin: 5px 0;
+            }
+        }
+    }
+}
+
+// 返回顶部样式
+.mi-backTop{
+    position: fixed;
+    right: 60px;
+    bottom: 20px;
+    opacity: .6;
+    a{
+        display: block;
+        width: 38px;
+        height: 38px;
+        background-color: #ddd;
+        border-radius: 3px;
+        border: 0;
+        cursor: pointer;
+        position: relative;
+        &:hover{
+            background-color: #e2e2e2;
+        }
+    }
+    div{
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+    .arrow {
+        width: 0;
+        height: 0;
+        top: -1px;
+        border: 9px solid transparent;
+        border-bottom-color: #aaa;
+    }
+    .stick{
+        width: 8px;
+        height: 14px;
+        top: 15px;
+        border-radius: 1px;
+        background-color: #aaa;
+    }
+}
+
+
+// reset bootstrap
+.alert-link {
+    text-decoration: underline;
+}
+
+.notes {
+    margin: 10px 0;
+    font-size: 12px;
+    color: #666;
 }

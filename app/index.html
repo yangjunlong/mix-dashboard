@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>MIX</title>
+    <title>Mix-Dashboard</title>
 
     <script type="text/javascript" src="/mix/lib/mod/mod.js"></script>
 
@@ -11,7 +11,7 @@
 <div id="header" class="header navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> </a>
+            <a href="/" class="navbar-brand"><span class="navbar-logo"></span> mix-dashboard</a>
             <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -35,11 +35,11 @@
                     </ul>
                     </div>
                 </li>
-                <li><a href="#">帮助</a></li>
+                <li><a href="#/about" ng-click="about($event)">关于</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <!-- <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="搜索...">
-            </form>
+            </form> -->
         </div>
     </div>
 </div>
@@ -48,43 +48,41 @@
     <div class="sidebar-section" ng-slimscroll rail-visible="true" height="100%">
         <ul class="nav main-menu" accordion>
             <li accordion-group is-open="home.open" ng-class="{active: home.open}" is-disabled="true">
-                <accordion-heading><i class="fa fa-home"></i>自定义的面板标题<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': home.open, 'glyphicon-chevron-right': !home.open}"></i>
+                <accordion-heading><i class="fa fa-home"></i>首页<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': home.open, 'glyphicon-chevron-right': !home.open}"></i>
                 </accordion-heading>
 
                 <ul class="child-menu">
-                    <li><a href="#">图标</a></li>
-                    <li><a href="#">用户管理</a></li>
+                    <li ng-class="{active: $state.includes('home.index')}"><a ui-sref="home.index">首页</a></li>
+                </ul>
+
+                <ul class="child-menu">
+                    <li ng-class="{active: $state.includes('home.order')}"><a ui-sref="home.order">订单示例</a></li>
                 </ul>
             </li>
 
-            <li>
-                
-                <a class="main-link" href="#"><i class="fa fa-home"></i>控制台</a> 
-                
-            </li>
-
-            <li>
-                
-                <a class="main-link" href="#"><i class="fa fa-th"></i>菜单管理</a> 
-                
-            </li>
-
-            <li>
-                
-                <a class="main-link" href="#"><i class="fa fa-home"></i>平台管理</a> 
-                
-            </li>
-            
-
-            <li accordion-group is-open="dever.open" ng-class="{active: dever.open}" is-disabled="true">
-                <accordion-heading><i class="fa fa-connectdevelop"></i>开发者选项<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': dever.open, 'glyphicon-chevron-right': !dever.open}"></i>
+            <li accordion-group is-open="table.open" ng-class="{active: table.open}" is-disabled="true">
+                <accordion-heading><i class="fa fa-table"></i>表格元素<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': table.open, 'glyphicon-chevron-right': !table.open}"></i>
                 </accordion-heading>
 
                 <ul class="child-menu">
-                    <li><a href="#">系统管理</a></li>
-                    <li><a href="#">平台管理</a></li>
-                    <li><a href="#">服务管理</a></li>
-                    <li><a href="#">节点管理</a></li>
+                    <li ng-class="{active: $state.includes('table.simple')}"><a ui-sref="table.simple">简单表格</a></li>
+                    <li ng-class="{active: $state.includes('table.dynamic')}"><a ui-sref="table.dynamic">动态表格</a></li>
+                </ul>
+            </li>
+
+            <!-- <li>
+                
+                <a class="main-link" href="#"><i class="fa fa-th"></i>菜单管理</a> 
+                
+            </li> -->
+
+            <li accordion-group is-open="icons.open" ng-class="{active: icons.open}" is-disabled="true">
+                <accordion-heading><i class="fa fa-fonticons"></i>字体图标<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': icons.open, 'glyphicon-chevron-right': !icons.open}"></i>
+                </accordion-heading>
+
+                <ul class="child-menu">
+                    <li ng-class="{active: $state.includes('icons.fontawesome')}"><a ui-sref="icons.fontawesome">FontAwesome</a></li>
+                    <li ng-class="{active: $state.includes('icons.glyphicons')}"><a ui-sref="icons.glyphicons">Glyphicons</a></li>
                 </ul>
             </li>
         </ul>
@@ -96,10 +94,12 @@
         <div ui-view></div>
     </div>
     <div class="footer">
-        <p class="pull-right">小米支付，荣誉出品</p>
-        <p><b>Copyright</b> XiaoMi &copy; 2010-2016</p>
+        <p class="pull-right">Mix Dashboard</p>
+        <p><b>Copyright</b> MIX &copy; 2016</p>
     </div>
 </div>
+
+<mi-back-top></mi-back-top>
 
 <script type="text/javascript">
     require.async('app/main', function (app) {

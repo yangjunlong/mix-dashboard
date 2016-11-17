@@ -1,0 +1,48 @@
+/**
+ * Font Awesome 样式
+ * 
+ * @author  Yang,junlong at 2016-08-22 12:40:16 build.
+ * @version $Id$
+ */
+
+.page-header {
+	font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #999;
+    font-size: 30px;
+}
+
+.fontawesome-icon-list {
+    margin-top: 22px;
+    .fa-hover {
+    	a {
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		    display: block;
+		    color: #222;
+		    line-height: 32px;
+		    height: 32px;
+		    padding-left: 10px;
+		    border-radius: 4px;
+		    text-decoration: none;
+		    &:hover {
+			    background-color: #1d9d74;
+			    color: #fff;
+			    text-decoration: none;
+			    .fa {
+				    font-size: 28px;
+				    vertical-align: -6px;
+				}
+			}
+		    .fa {
+			    width: 32px;
+			    font-size: 18px;
+			    display: inline-block;
+			    text-align: right;
+			    margin-right: 10px;
+			}
+		}
+    }
+}

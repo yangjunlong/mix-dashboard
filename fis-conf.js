@@ -24,7 +24,10 @@ fis.config.merge({
             js: 'jswrapper, require-async'
             //html: 'amd'
         },
-        postpackager: 'modjs'
+        postpackager: 'modjs',
+        optimizer : {
+            html : 'tpl-compress'
+        }
     },
     // 插件配置
     settings : {

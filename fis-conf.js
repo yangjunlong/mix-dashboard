@@ -63,18 +63,63 @@ fis.config.merge({
             {
                 // .html|css 后缀的文件不加入map.json
                 reg: /^.*(.+\.(?:html|css))$/i,
-                useMap: false
+                useMap: true,
+                url: '/static$&',
+                release: '/static$&'
             },
             {
-                reg: /^(?!.*mod.js).*$/i,
-                isMod: true
+                reg: /^(?!.*mod.js)(.*$)/i,
+                isMod: true,
+                url: '/static$1',
+                release: '/static$1'
             },
             {
                 // default
                 reg: /^.+$/,
-                release: '/static/$&'
+                url: '/static$&',
+                release: '/static$&'
             }
         ]
+    }
+});
+
+fis.emitter.once('fis-conf:loaded', function() {
+    if (process.title.split(/\s/)[3] == 'output') {
+        fis.config.set('roadmap.path', [
+            {
+                reg: /LICENSE/i,
+                release: false
+            },
+            {
+                reg: 'server.conf',
+                release: '/WEB-INF/server.conf'
+            },
+            {
+                reg: /^\/app\/index\.html$/i,
+                isMod: true,
+                useMap: false,
+                release: '/index.html'
+            },
+            {
+                // .html|css 后缀的文件不加入map.json
+                reg: /^.*(.+\.(?:html|css))$/i,
+                useMap: true,
+                url: './static$&',
+                release: './static$&'
+            },
+            {
+                reg: /^(?!.*mod.js)(.*$)/i,
+                isMod: true,
+                url: '/mix-dashboard/static$1',
+                release: '/static$1'
+            },
+            {
+                // default
+                reg: /^.+$/,
+                url: '/mix-dashboard/static$&',
+                release: '/static$&'
+            }
+        ]);
     }
 });
 

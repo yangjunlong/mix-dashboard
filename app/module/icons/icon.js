@@ -1,1 +1,0 @@
-define("app/module/icons/icon.js",function(n){var o=n("app/app.js");o.registerController("fontIconCtrl",["$scope","$stateParams",function(n,o){n.title="字体图标",n.titleIcon="fa-fonticons",n.prefix="fa";var i=o.icon;i.indexOf("glyphicon")>-1?n.prefix="glyphicon":i="fa-"+o.icon,n.icon=i}])});

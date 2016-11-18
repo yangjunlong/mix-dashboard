@@ -1,1 +1,0 @@
-define("app/module/icons/glyphicons/glyphicons.js",function(n){var o=n("app/app.js");o.registerController("glyphiconsCtrl",["$scope",function(n){n.title="Glyphicons",n.titleIcon="fa-fonticons"}])});

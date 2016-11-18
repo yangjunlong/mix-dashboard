@@ -1,1 +1,0 @@
-define("mix/lib/syntaxhighlighter/scripts/shBrushPlain.js",function(i,n){!function(){function t(){}"undefined"!=typeof i?SyntaxHighlighter=i("shCore").SyntaxHighlighter:null,t.prototype=new SyntaxHighlighter.Highlighter,t.aliases=["text","plain"],SyntaxHighlighter.brushes.Plain=t,"undefined"!=typeof n?n.Brush=t:null}()});

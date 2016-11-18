@@ -1,0 +1,37 @@
+<!--
+ * 简单表格 ui-view
+ * 
+ * @author  Yang,junlong at 2016-08-22 19:53:29 build.
+ * @version $Id$
+ -->
+
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title"><i class="fa-fw fa {{titleIcon}}"></i> {{title}} </h1>
+	</div>
+</div>
+
+<div class="alert alert-success">
+    简单表格式示例，只是由静态的html渲染而成，并不涉及后端数据的交互。
+</div>
+
+<h2>预览效果</h2>
+<span ng-bind-html="table"></span>
+
+<h2>表格源码</h2>
+<mi-syntaxhighlighter lang="Html" content="{{table}}" theme="RDark"></mi-syntaxhighlighter>
+<p class="notes">
+<small class="text-muted">你可以复制上面的表格源代码，然后粘贴到你需要在网页中的位置。</small>
+</p>
+
+<h2>Bootstrap样式说明</h2>
+<a href="http://v3.bootcss.com/css/#tables" target="_blank">点击此处查看表格样式详情</a>
+
+<hr />
+
+<h2>简单表格 ui-view 路由定义(routeDefs)</h2>
+<mi-syntaxhighlighter lang="js" content="{{routeDefs}}" theme="RDark"></mi-syntaxhighlighter>
+<h2>简单表格 ui-view 模板</h2>
+<mi-syntaxhighlighter lang="html" content="{{view}}" theme="RDark"></mi-syntaxhighlighter>
+<h2>简单表格 ui-view 控制器</h2>
+<mi-syntaxhighlighter lang="js" content="{{controller}}" theme="RDark"></mi-syntaxhighlighter>

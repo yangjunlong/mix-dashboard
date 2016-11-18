@@ -1,1 +1,0 @@
-define("app/module/icons/fontawesome/fontawesome.js",function(o){var e=o("app/app.js");e.registerController("fontAwesomeCtrl",["$scope",function(o){o.title="Font Awesome",o.titleIcon="fa-fonticons"}])});

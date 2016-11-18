@@ -1,0 +1,37 @@
+/**
+ * 首页样式
+ * 
+ * @author  Yang,junlong at 2016-06-28 10:46:19 build.
+ * @version $Id$
+ */
+h2 {
+  margin-top: 30px;
+}
+.home .work-view ul,
+.home .work-view ol {
+  margin: 0 0 9px 25px;
+}
+.home .work-view ul li,
+.home .work-view ol li {
+  list-style-type: disc;
+  line-height: 1.5;
+}
+.ibox {
+  padding: 10px;
+}
+.ibox .ibox-title {
+  background-color: #ffffff;
+  margin-bottom: 0;
+  padding: 7px 0 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.ibox .ibox-content {
+  font-size: 18px;
+}
+.ibox .ibox-foot {
+  padding: 15px 0 5px;
+}
+.demo {
+  height: 300px;
+}

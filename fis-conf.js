@@ -50,6 +50,12 @@ fis.config.merge({
         },
         path : [
             {
+                reg: '**/_*.*',
+                release: false,
+                useAMD: false,
+                useOptimizer: false
+            },
+            {
                 reg: /LICENSE/i,
                 release: false
             },

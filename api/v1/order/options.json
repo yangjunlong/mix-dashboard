@@ -1,0 +1,22 @@
+{
+    "code": 0,
+    "msg": "SUCCESS",
+    "data": {
+        "bizTypes": [{
+            "name": "全部",
+            "value": "TRADE"
+        },{
+            "name": "交易1",
+            "value": "TRADE1"
+        },{
+            "name": "交易2",
+            "value": "TRADE2"
+        },{
+            "name": "交易3",
+            "value": "TRADE3"
+        },{
+            "name": "交易4",
+            "value": "TRADE4"
+        }]
+    }
+}

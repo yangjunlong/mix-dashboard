@@ -23,7 +23,7 @@ app.registerController('orderCtrl', ['$scope', '$http', '$state', '$stateParams'
         }
     });
 
-    $http.get('/api/v1/order/options.json')
+    $http.get('api/v1/order/options.json')
     .success(function(data, status, headers, config) {
         var data = data.data;
         var bizTypes = data.bizTypes

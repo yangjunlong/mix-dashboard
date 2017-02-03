@@ -8,21 +8,6 @@
 var app = require('/app/app.js');
 require('mix/directive/miSyntaxHighlighter/miSyntaxHighlighter');
 
-// 格式化json
-function jsonStringify(data, space){
-    var seen=[];
-    return JSON.stringify(data,function(key,val){
-        if(!val||typeof val !=='object'){
-            return val;
-        }
-        if(seen.indexOf(val)!==-1){
-            return '[Circular]';
-        }
-        seen.push(val);
-        return val;
-    },space);
-}
-
 app.registerController('dynamicTableCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce){
     $scope.title = '动态表格';
     $scope.titleIcon = 'fa-table'

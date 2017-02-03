@@ -56,6 +56,11 @@ fis.config.merge({
                 useOptimizer: false
             },
             {
+                reg: /^\/(api)\/(.*)/i,
+                isMod: false,
+                release: '/$1/$2'
+            },
+            {
                 reg: /LICENSE/i,
                 release: false
             },

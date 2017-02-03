@@ -31,7 +31,7 @@ app.registerController('orderCtrl', ['$scope', '$http', '$state', '$stateParams'
         $scope.bizTypesOptions = bizTypes;
     });
 
-    $http.get('/api/v1/table/dynamic.json', {
+    $http.get('api/v1/table/dynamic.json', {
     	params: $scope.queryParams
     })
     .success(function(data, status, headers, config) {

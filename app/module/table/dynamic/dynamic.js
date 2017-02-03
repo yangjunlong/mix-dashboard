@@ -13,7 +13,7 @@ app.registerController('dynamicTableCtrl', ['$scope', '$http', '$sce', function(
     $scope.titleIcon = 'fa-table'
     
     // 动态表格接口
-    $http.get('/api/v1/table/dynamic.json', {})
+    $http.get('api/v1/table/dynamic.json', {})
     .success(function(data, status, headers, config) {
     	// 给模板中的tableData赋值
         $scope.tableData = data.data;

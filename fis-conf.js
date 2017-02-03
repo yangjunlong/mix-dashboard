@@ -101,6 +101,17 @@ fis.emitter.once('fis-conf:loaded', function() {
     if (process.title.split(/\s/)[3] == 'output') {
         fis.config.set('roadmap.path', [
             {
+                reg: '**/_*.*',
+                release: false,
+                useAMD: false,
+                useOptimizer: false
+            },
+            {
+                reg: /^\/(api)\/(.*)/i,
+                isMod: false,
+                release: '/$1/$2'
+            },
+            {
                 reg: /LICENSE/i,
                 release: false
             },

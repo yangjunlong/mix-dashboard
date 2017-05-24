@@ -20,7 +20,7 @@
 > 5分钟上手指南，前提你的电脑已经安装了node + fis环境
 
 **安装nodejs环境**
-访问[nodejs](https://nodejs.org/)官网，或者参考我之前写的一篇文章[Centos编译安装nodejs](https://sobird.me/centos-compile-and-install-nodejs.htm)，大家都懂的。
+访问[nodejs](https://nodejs.org/)官网，或者参考我之前写的一篇文章[Centos编译安装nodejs](http://sobird.me/centos-compile-and-install-nodejs.htm)，大家都懂的。
 
 	$ cd ~
 	$ wget https://nodejs.org/dist/v0.12.9/node-v0.12.9.tar.gz
@@ -32,7 +32,6 @@
 
 
 **安装fis前端构建工具**
-访问[fis](http://fex.baidu.com/fis-site/index.html)官网，或者参考一下我之前写的一个高大上的PPT[FIS在百度经验 - 技术分享](http://dev.sobird.me/ppt)。此PPT质量比刘同学的屁屁踢要略高大上一下，大可放心查看。
 
 	$ npm install fis -g
 
